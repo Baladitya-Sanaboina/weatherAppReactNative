@@ -6,9 +6,12 @@ import {
   Button,
   Image,
   ActivityIndicator,
+  ImageBackground,
 } from "react-native";
 import { Component } from "react";
+
 const weatherPng = require("./weather.png");
+const weatherBg = require("./weatherBg.jpg");
 import React from "react";
 const clearPng = require("./clear.png");
 const cloudyPng = require("./cloudy.png");
@@ -54,6 +57,7 @@ class Weather extends Component {
         weatherStatus: weatherStatusList.finish,
         weatherData: data,
       });
+      console.log(data);
     } else {
       this.setState({
         weatherStatus: weatherStatusList.failed,
@@ -128,7 +132,7 @@ class Weather extends Component {
     const { location, weatherStatus } = this.state;
 
     return (
-      <View>
+      <ImageBackground source={weatherBg} style={styles.container}>
         <TextInput
           style={styles.inputBox}
           placeholder="Enter the city"
@@ -138,7 +142,7 @@ class Weather extends Component {
           <Button title="submit" onPress={this.getWeatherStatus} />
         </View>
         <View style={styles.weatherCard}>{this.renderWeatherCard()}</View>
-      </View>
+      </ImageBackground>
     );
   }
 }
@@ -176,6 +180,12 @@ const styles = StyleSheet.create({
   mainTemp: {
     fontSize: 36,
     fontWeight: "bold",
+  },
+  container: {
+    flex: 1,
+    alignItems: "center",
+    padding: 40,
+    fontFamily: "Roboto",
   },
 });
 
